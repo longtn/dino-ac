@@ -5,10 +5,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>dino3.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Base\" />
+    <None Remove="dino3.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="dino3.ico" />
   </ItemGroup>
 
 </Project>

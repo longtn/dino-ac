@@ -12,28 +12,10 @@
         <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </Page.Resources>
 
-    <Grid Margin="20" Background="White">
+    <StackPanel Margin="20" Background="White">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="5"/>
-
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="5"/>
-
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0" Text="Check Mouse:"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Grid Grid.Row="1" >
+        <TextBlock Text="Check Mouse:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
@@ -51,11 +33,11 @@
                      HorizontalAlignment="Left" VerticalAlignment="Center"
                      Text="{Binding CurrentY}"/>
         </Grid>
-        <Separator Grid.Row="2"/>
 
-        <TextBlock Grid.Row="3" Text="Click Point 1 (F1):"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Grid Grid.Row="4" >
+        <Separator/>
+
+        <TextBlock Text="Click Point 1 (F1):" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
@@ -78,9 +60,8 @@
                      Text="{Binding InputY}"/>
         </Grid>
 
-        <TextBlock Grid.Row="5" Text="Click Point 2 (F2):"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Grid Grid.Row="6" >
+        <TextBlock Text="Click Point 2 (F2):" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
@@ -103,25 +84,57 @@
                      Text="{Binding InputY2}"/>
         </Grid>
 
-        <Grid Grid.Row="8" >
+        <Separator/>
+
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Click to:"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" Width="80"
+                      HorizontalAlignment="Left" VerticalAlignment="Center"
+                      SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem IsSelected="True">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>1 > 2 > 1</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>1 > 2</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>1 ONLY</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+            </ComboBox>
+        </Grid>
+
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="Time delay (min):"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Width="100"
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
-                 MouseDoubleClick="TextBoxSelectAll"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Width="80"
+                     HorizontalAlignment="Left" VerticalAlignment="Center"
+                     MouseDoubleClick="TextBoxSelectAll"
                      IsEnabled="{Binding IsAuto, Converter={StaticResource InverseBooleanConverter}}"
-                 Text="{Binding InputTime}"/>
+                     Text="{Binding InputTime}"/>
         </Grid>
 
-        <ProgressBar Grid.Row="9" Height="10" Value="{Binding CountTime}"/>
+        <Separator/>
 
-        <Button Grid.Row="11" HorizontalAlignment="Center" 
-                VerticalAlignment="Bottom" Width="200" Height="30" 
+        <ProgressBar Margin="0,10,0,10" Height="10" Width="180" Value="{Binding CurrentTime}"/>
+
+        <Button HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                Margin="0,10,0,10" Width="180" Height="30" 
                 Content="{Binding RunningState}"
                 Command="{Binding Path=AutoClickCommand}"/>
-    </Grid>
+    </StackPanel>
 </Page>

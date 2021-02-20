@@ -23,25 +23,32 @@ namespace AC.Pages
 
         private void Page_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F1 || e.Key == Key.F2 || e.Key == Key.F5)
+            SettingsPageViewModel vm = this.DataContext as SettingsPageViewModel;
+            if (vm == null) return;
+
+            switch (e.Key)
             {
-                SettingsPageViewModel vm = this.DataContext as SettingsPageViewModel;
-                
-                if (e.Key == Key.F1)
-                {
-                    vm.InputX = vm.CurrentX;
-                    vm.InputY = vm.CurrentY;
-                }
-                else if (e.Key == Key.F2)
-                {
-                    vm.InputX2 = vm.CurrentX;
-                    vm.InputY2 = vm.CurrentY;
-                }
-                else // F5
-                {
+                case Key.F1:
+                    vm.SetInputCommand.Execute(true);
+                    break;
+                case Key.F2:
+                    vm.SetInput2Command.Execute(true);
+                    break;
+                case Key.F5:
                     vm.AutoClickCommand.Execute(true);
-                }
+                    break;
+                default:
+                    break;
             }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SettingsPageViewModel vm = this.DataContext as SettingsPageViewModel;
+            if (vm == null) return;
+
+            var selected = (sender as ComboBox).SelectedIndex;
+            vm.ChangeClickTypeCommand.Execute(selected);
         }
     }
 }

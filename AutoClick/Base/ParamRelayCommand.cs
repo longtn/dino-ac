@@ -3,18 +3,18 @@ using System.Windows.Input;
 
 namespace AC.Base
 {
-    public class RelayCommand : ICommand
+    public class ParamRelayCommand : ICommand
     {
-        private Action _action;
+        private Action<object> _action;
 
         public event EventHandler CanExecuteChanged = (sender, e) => { };
 
-        public RelayCommand(Action action)
+        public ParamRelayCommand(Action<object> action)
         {
             _action = action;
         }
 
-        public RelayCommand()
+        public ParamRelayCommand()
         {
 
         }
@@ -26,7 +26,7 @@ namespace AC.Base
 
         public void Execute(object parameter)
         {
-            _action();
+            _action(parameter);
         }
     }
 }
